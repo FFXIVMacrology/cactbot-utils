@@ -1,0 +1,26 @@
+{
+  "name": "cactbot-utils",
+  "version": "1.0.0",
+  "type": "commonjs",
+  "main": "dist/index.js",
+  "author": "Maiko Tan <maiko.tan.coding@gmail.com>",
+  "license": "MIT",
+  "private": true,
+  "scripts": {
+    "build": "babel src --out-dir dist",
+    "watch": "babel src --watch --out-dir dist"
+  },
+  "dependencies": {
+    "axios": "^0.21.0",
+    "core-js": "^3.7.0",
+    "regenerator-runtime": "^0.13.7",
+    "yargs": "^16.1.1"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.12.7",
+    "@babel/core": "^7.12.7",
+    "@babel/node": "^7.12.6",
+    "@babel/preset-env": "^7.12.7",
+    "@types/yargs": "^15.0.10"
+  }
+}
