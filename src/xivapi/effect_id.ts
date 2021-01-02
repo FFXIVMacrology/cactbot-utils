@@ -1,4 +1,4 @@
-import { get } from "./request.js";
+import { get, all } from "./request.js";
 
 const known_mapping = {
   "Thundercloud": "164",
@@ -32,7 +32,7 @@ const known_mapping = {
   "Flourishing Fan Dance": "1820",
 }
 
-export async function get_effect_id() {
+export async function getEffectId() {
   try {
     const data = await get("/Status", [
       "ID",
@@ -41,7 +41,7 @@ export async function get_effect_id() {
 
     const resultMap = new Map();
 
-    data.Results.forEach(element => {
+    data.Results.forEach((element: { Name: any; ID: any; }) => {
       resultMap.set(element.Name, element.ID);
     });
 
@@ -50,13 +50,15 @@ export async function get_effect_id() {
       requestPromises.push(get("/Status", ["ID", "Name"], i));
     }
 
-    const allReqResults = await Promise.all(requestPromises);
+    const allReqResults = await all(requestPromises);
 
     allReqResults.forEach(results => {
-      results.Results.forEach(element => {
+      (results as any).Results.forEach(element => {
         resultMap.set(element.Name, element.ID);
       })
     })
+
+
 
     console.log(resultMap);
 
