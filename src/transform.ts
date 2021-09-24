@@ -4,12 +4,17 @@ import * as fs from "fs";
 import { Identifier, Node } from "@babel/types"
 
 import generator from "@babel/generator";
-import { promisify } from "bluebird";
+import { promisify } from "util";
 
 const extractTimelineReplace = async (path: string): Promise<object> => {
   const code = String(await promisify(fs.readFile)(path));
 
-  const ast = await babel.parseAsync(code);
+  const ast = await babel.parseAsync(code, {
+    presets: [
+      "env",
+      "typescript"
+    ],
+  });
 
   let timelineReplaceNode: Node = null;
 
