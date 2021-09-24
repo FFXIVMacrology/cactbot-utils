@@ -7,7 +7,9 @@ const xivapi = Axios.create({
 
 xivapi.interceptors.request.use(
   (config) => {
-    config.data.private_key = /* process.env.XIVAPI_KEY */ '5e14269f29e04889a7aa74e2b4daafb10c4061a4265746798f324608215c0809';
+    if (process.env['XIVAPI_KEY']) {
+      config.data.private_key = process.env['XIVAPI_KEY'];
+    }
 
     return config;
   },
